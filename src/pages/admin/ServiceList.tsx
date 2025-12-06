@@ -22,7 +22,8 @@ import {
   XCircle,
   MoreHorizontal,
   Clock,
-  DollarSign
+  DollarSign,
+  Hash
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
