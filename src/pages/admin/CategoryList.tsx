@@ -23,7 +23,8 @@ import {
   CheckCircle,
   XCircle,
   MoreHorizontal,
-  Palette
+  Palette,
+  Hash
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";

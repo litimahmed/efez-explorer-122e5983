@@ -14,14 +14,95 @@ const ProfessionalDetail = () => {
   if (isLoading) {
     return (
       <div className="space-y-6 max-w-7xl mx-auto py-8 px-4">
-        <Skeleton className="h-8 w-48" />
-        <Card className="shadow-elegant border-0">
-          <CardContent className="p-6 space-y-4">
-            {[...Array(8)].map((_, i) => (
-              <Skeleton key={i} className="h-6 w-full" />
-            ))}
-          </CardContent>
-        </Card>
+        {/* Header Skeleton */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <Skeleton className="h-10 w-10 rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-7 w-48" />
+              <Skeleton className="h-4 w-32" />
+            </div>
+          </div>
+          <Skeleton className="h-10 w-28 rounded-xl" />
+        </div>
+
+        {/* Cards Skeleton */}
+        <div className="grid gap-6 md:grid-cols-2">
+          {/* Personal Info Card */}
+          <Card className="shadow-elegant border-0">
+            <CardHeader className="border-b border-border/50 bg-muted/30">
+              <Skeleton className="h-5 w-40" />
+            </CardHeader>
+            <CardContent className="space-y-4 pt-4">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="space-y-2">
+                  <Skeleton className="h-3 w-24" />
+                  <Skeleton className="h-5 w-full" />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Address Card */}
+          <Card className="shadow-elegant border-0">
+            <CardHeader className="border-b border-border/50 bg-muted/30">
+              <Skeleton className="h-5 w-24" />
+            </CardHeader>
+            <CardContent className="space-y-4 pt-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="space-y-2">
+                  <Skeleton className="h-3 w-24" />
+                  <Skeleton className="h-5 w-full" />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Description Card */}
+          <Card className="md:col-span-2 shadow-elegant border-0">
+            <CardHeader className="border-b border-border/50 bg-muted/30">
+              <Skeleton className="h-5 w-28" />
+            </CardHeader>
+            <CardContent className="pt-4">
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-3/4" />
+                <Skeleton className="h-4 w-1/2" />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Links Card */}
+          <Card className="md:col-span-2 shadow-elegant border-0">
+            <CardHeader className="border-b border-border/50 bg-muted/30">
+              <Skeleton className="h-5 w-20" />
+            </CardHeader>
+            <CardContent className="pt-4">
+              <div className="flex flex-wrap gap-4">
+                {[...Array(3)].map((_, i) => (
+                  <Skeleton key={i} className="h-5 w-24" />
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Metadata Card */}
+          <Card className="md:col-span-2 shadow-elegant border-0">
+            <CardHeader className="border-b border-border/50 bg-muted/30">
+              <Skeleton className="h-5 w-32" />
+            </CardHeader>
+            <CardContent className="pt-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {[...Array(2)].map((_, i) => (
+                  <div key={i} className="space-y-2">
+                    <Skeleton className="h-3 w-24" />
+                    <Skeleton className="h-5 w-48" />
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
