@@ -32,22 +32,41 @@ import {
   AlertCircle
 } from "lucide-react";
 import { toast } from "sonner";
+import { useTheme, AccentColor } from "@/contexts/ThemeContext";
+
+const accentColors: { id: AccentColor; label: string; bgClass: string }[] = [
+  { id: "teal", label: "Teal", bgClass: "bg-[hsl(182,86%,14%)]" },
+  { id: "blue", label: "Blue", bgClass: "bg-[hsl(217,91%,50%)]" },
+  { id: "green", label: "Green", bgClass: "bg-[hsl(142,71%,35%)]" },
+  { id: "purple", label: "Purple", bgClass: "bg-[hsl(271,81%,50%)]" },
+  { id: "orange", label: "Orange", bgClass: "bg-[hsl(25,95%,53%)]" },
+];
 
 function SettingsContent() {
   const [hasChanges, setHasChanges] = useState(false);
+  const { accentColor, setAccentColor } = useTheme();
+  const [selectedColor, setSelectedColor] = useState<AccentColor>(accentColor);
 
   const handleSave = () => {
+    setAccentColor(selectedColor);
     toast.success("Settings saved successfully");
     setHasChanges(false);
   };
 
   const handleReset = () => {
+    setSelectedColor("teal");
+    setAccentColor("teal");
     toast.info("Settings reset to defaults");
     setHasChanges(false);
   };
 
   const markAsChanged = () => {
     if (!hasChanges) setHasChanges(true);
+  };
+
+  const handleColorSelect = (color: AccentColor) => {
+    setSelectedColor(color);
+    markAsChanged();
   };
 
   return (
@@ -434,17 +453,25 @@ function SettingsContent() {
                   </div>
                   <Switch defaultChecked onCheckedChange={markAsChanged} />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <Label>Accent Color</Label>
                   <div className="flex gap-3">
-                    {["bg-primary", "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500"].map((color, i) => (
+                    {accentColors.map((color) => (
                       <button
-                        key={color}
-                        className={`w-8 h-8 rounded-full ${color} ring-2 ring-offset-2 ring-offset-background ${i === 0 ? "ring-primary" : "ring-transparent hover:ring-muted-foreground/50"} transition-all`}
-                        onClick={markAsChanged}
+                        key={color.id}
+                        title={color.label}
+                        className={`w-8 h-8 rounded-full ${color.bgClass} ring-2 ring-offset-2 ring-offset-background ${
+                          selectedColor === color.id 
+                            ? "ring-foreground scale-110" 
+                            : "ring-transparent hover:ring-muted-foreground/50"
+                        } transition-all duration-200`}
+                        onClick={() => handleColorSelect(color.id)}
                       />
                     ))}
                   </div>
+                  <p className="text-xs text-muted-foreground">
+                    Selected: <span className="font-medium capitalize">{selectedColor}</span>
+                  </p>
                 </div>
               </CardContent>
             </Card>
