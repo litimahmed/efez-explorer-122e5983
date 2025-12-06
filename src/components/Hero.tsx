@@ -126,7 +126,7 @@ const Hero = () => {
             <img
               src={heroImage}
               alt="Queue management and reservation platform interface"
-              className="w-full h-auto rounded-2xl shadow-xl"
+              className="w-full h-auto rounded-2xl"
             />
           </motion.div>
         </div>
