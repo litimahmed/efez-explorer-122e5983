@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -132,8 +133,82 @@ export default function AboutUsEdit() {
 
   if (isLoadingVersion) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="py-8 px-4 max-w-7xl mx-auto space-y-8">
+        {/* Header Skeleton */}
+        <div className="flex items-center gap-4">
+          <Skeleton className="h-10 w-10 rounded-xl" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-7 w-40" />
+            <Skeleton className="h-4 w-64" />
+          </div>
+        </div>
+
+        {/* Language Tabs Skeleton */}
+        <div className="flex gap-3 flex-wrap">
+          {[...Array(3)].map((_, i) => (
+            <Skeleton key={i} className="h-10 w-28 rounded-md" />
+          ))}
+        </div>
+
+        {/* Version & Status Card Skeleton */}
+        <Card className="border-border/40 shadow-sm">
+          <CardHeader className="pb-4">
+            <div className="flex items-center gap-3">
+              <Skeleton className="h-10 w-10 rounded-lg" />
+              <div className="space-y-2">
+                <Skeleton className="h-5 w-40" />
+                <Skeleton className="h-4 w-52" />
+              </div>
+            </div>
+          </CardHeader>
+          <Separator className="mb-6" />
+          <CardContent className="space-y-6">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-16" />
+                <Skeleton className="h-11 w-full rounded-md" />
+              </div>
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-12" />
+                <Skeleton className="h-11 w-full rounded-lg" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Content Card Skeleton */}
+        <Card className="border-border/40 shadow-sm">
+          <CardHeader className="pb-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Skeleton className="h-10 w-10 rounded-lg" />
+                <div className="space-y-2">
+                  <Skeleton className="h-5 w-36" />
+                  <Skeleton className="h-4 w-52" />
+                </div>
+              </div>
+              <Skeleton className="h-6 w-12 rounded-full" />
+            </div>
+          </CardHeader>
+          <Separator className="mb-6" />
+          <CardContent className="space-y-6">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <Skeleton className="h-4 w-4" />
+                  <Skeleton className="h-4 w-24" />
+                </div>
+                <Skeleton className={`w-full rounded-md ${i === 2 || i === 3 || i === 4 || i === 5 || i === 6 ? "h-20" : "h-11"}`} />
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        {/* Action Buttons Skeleton */}
+        <div className="flex items-center justify-end gap-4 pt-4 pb-8">
+          <Skeleton className="h-11 w-24 rounded-md" />
+          <Skeleton className="h-11 w-32 rounded-md" />
+        </div>
       </div>
     );
   }
