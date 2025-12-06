@@ -53,6 +53,7 @@ import AdminProfessionalEdit from "./pages/admin/ProfessionalEdit";
 import AdminProfile from "./pages/admin/Profile";
 import AdminManage from "./pages/admin/Manage";
 import AdminAnalytics from "./pages/admin/Analytics";
+import AdminSettings from "./pages/admin/Settings";
 
 const queryClient = new QueryClient();
 
@@ -103,6 +104,7 @@ const App = () => (
           <Route path="/admin/profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
           <Route path="/admin/manage" element={<ProtectedRoute><AdminManage /></ProtectedRoute>} />
           <Route path="/admin/analytics" element={<ProtectedRoute><AdminAnalytics /></ProtectedRoute>} />
+          <Route path="/admin/settings" element={<ProtectedRoute><AdminSettings /></ProtectedRoute>} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>
