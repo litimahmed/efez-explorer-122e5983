@@ -1,9 +1,21 @@
+import { useState } from "react";
 import { DashboardLayout } from "@/components/admin/DashboardLayout";
 import { useProfile } from "@/hooks/admin/useProfile";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { 
   User, 
   Mail, 
@@ -12,7 +24,9 @@ import {
   Calendar, 
   Building2,
   MapPin,
-  Globe
+  Globe,
+  Pencil,
+  Loader2
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -60,7 +74,9 @@ const ProfileSkeleton = () => (
 );
 
 const Profile = () => {
-  const { profile, isLoading, error } = useProfile();
+  const { profile, isLoading, error, updateProfile, isUpdating } = useProfile();
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editForm, setEditForm] = useState({ nom: "", numero_telephone: "" });
 
   const getAccessLevelLabel = (level: string) => {
     const levels: Record<string, string> = {
@@ -88,6 +104,24 @@ const Profile = () => {
       .join('')
       .toUpperCase()
       .slice(0, 2);
+  };
+
+  const handleOpenEditDialog = () => {
+    if (profile) {
+      setEditForm({
+        nom: profile.nom,
+        numero_telephone: profile.numero_telephone,
+      });
+      setIsEditDialogOpen(true);
+    }
+  };
+
+  const handleSaveProfile = () => {
+    updateProfile(editForm, {
+      onSuccess: () => {
+        setIsEditDialogOpen(false);
+      },
+    });
   };
 
   if (error) {
@@ -143,6 +177,16 @@ const Profile = () => {
                     </Badge>
                   </div>
                 </div>
+
+                <Button
+                  onClick={handleOpenEditDialog}
+                  className="absolute top-4 right-4 md:relative md:top-0 md:right-0"
+                  variant="outline"
+                  size="sm"
+                >
+                  <Pencil className="h-4 w-4 mr-2" />
+                  Edit Profile
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -267,6 +311,54 @@ const Profile = () => {
           </Card>
         </div>
       ) : null}
+
+      {/* Edit Profile Dialog */}
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Edit Profile</DialogTitle>
+            <DialogDescription>
+              Update your profile information below.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="nom">Name</Label>
+              <Input
+                id="nom"
+                value={editForm.nom}
+                onChange={(e) => setEditForm(prev => ({ ...prev, nom: e.target.value }))}
+                placeholder="Enter your name"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                id="phone"
+                value={editForm.numero_telephone}
+                onChange={(e) => setEditForm(prev => ({ ...prev, numero_telephone: e.target.value }))}
+                placeholder="Enter your phone number"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setIsEditDialogOpen(false)}
+              disabled={isUpdating}
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={handleSaveProfile}
+              disabled={isUpdating || !editForm.nom.trim() || !editForm.numero_telephone.trim()}
+            >
+              {isUpdating && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+              Save Changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </DashboardLayout>
   );
 };

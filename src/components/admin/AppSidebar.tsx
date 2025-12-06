@@ -13,7 +13,11 @@ const mainItems = [
   { title: "Dashboard", url: "/admin/dashboard", icon: LayoutDashboard },
   { title: "Manage Queues", url: "/admin/manage", icon: Users },
   { title: "Analytics", url: "/admin/analytics", icon: BarChart3 },
+];
+
+const settingsItems = [
   { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "My Profile", url: "/admin/profile", icon: UserCircle },
 ];
 
 export function AppSidebar() {
@@ -121,6 +125,49 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="space-y-0.5">
               {mainItems.map(item => {
+                const active = isActive(item.url);
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <NavLink
+                        to={item.url}
+                        end
+                        className={`
+                          ${open ? "px-3 py-2.5" : "px-2 py-2.5 justify-center"}
+                          rounded-lg transition-all duration-150
+                          text-muted-foreground hover:text-foreground
+                          hover:bg-sidebar-accent
+                          flex items-center gap-3
+                          group relative
+                        `}
+                        activeClassName={`
+                          bg-primary text-primary-foreground font-medium
+                          shadow-sm shadow-primary/20
+                          hover:bg-primary hover:text-primary-foreground
+                        `}
+                      >
+                        <item.icon className={`h-[18px] w-[18px] flex-shrink-0 transition-transform group-hover:scale-105 ${active ? "text-primary-foreground" : ""}`} />
+                        {open && <span className="text-sm">{item.title}</span>}
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Settings Section */}
+        <SidebarGroup className="px-3 py-2">
+          {open && (
+            <SidebarGroupLabel className="text-[10px] font-semibold text-muted-foreground/70 uppercase tracking-widest px-3 mb-1">
+              Settings
+            </SidebarGroupLabel>
+          )}
+
+          <SidebarGroupContent>
+            <SidebarMenu className="space-y-0.5">
+              {settingsItems.map(item => {
                 const active = isActive(item.url);
                 return (
                   <SidebarMenuItem key={item.title}>
@@ -696,29 +743,8 @@ export function AppSidebar() {
 
         {/* Footer */}
         <SidebarFooter className="mt-auto p-3 border-t border-sidebar-border">
-          <SidebarMenu className="space-y-1">
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <NavLink
-                  to="/admin/profile"
-                  end
-                  className={`
-                    ${open ? "px-3 py-2.5" : "px-2 py-2.5 justify-center"}
-                    rounded-lg transition-all duration-150
-                    text-muted-foreground hover:text-foreground
-                    hover:bg-sidebar-accent
-                    flex items-center gap-3
-                  `}
-                  activeClassName="bg-primary text-primary-foreground font-medium"
-                >
-                  <UserCircle className="h-[18px] w-[18px] flex-shrink-0" />
-                  {open && <span className="text-sm">My Profile</span>}
-                </NavLink>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
           {open && (
-            <div className="px-3 py-2 mt-2">
+            <div className="px-3 py-2">
               <p className="text-[10px] text-muted-foreground/60 font-medium">Toorrii Admin v1.0</p>
             </div>
           )}
