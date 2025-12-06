@@ -7,3 +7,8 @@ export interface AdminProfile {
   etat_compte: string;
   date_creation: string;
 }
+
+export interface UpdateProfilePayload {
+  nom: string;
+  numero_telephone: string;
+}
