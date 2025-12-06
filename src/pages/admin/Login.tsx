@@ -133,8 +133,6 @@ const Login = () => {
           {/* Left Column - Form */}
           <div className={`flex items-center justify-center p-10 md:p-14 relative ${isRTL ? 'md:order-2' : ''}`}>
             <div className="w-full max-w-md">
-              {/* Decorative corner accent */}
-              <div className={`absolute top-8 ${isRTL ? 'right-8 border-t-4 border-r-4' : 'left-8 border-t-4 border-l-4'} w-20 h-20 border-primary/30`}></div>
               
               {/* Header */}
               <div className="mb-12 animate-fade-in">
