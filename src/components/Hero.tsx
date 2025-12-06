@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Calendar, Clock } from "lucide-react";
 import { useTranslation } from "@/contexts/TranslationContext";
-import heroImage from "@/assets/toorrii_heroo.png";
+import heroImage from "@/assets/hero-queue-management.png";
 
 /**
  * @component Hero
@@ -125,8 +125,8 @@ const Hero = () => {
           >
             <img
               src={heroImage}
-              alt="Toorrii App in action"
-              className="max-w-full h-auto rounded-lg"
+              alt="Queue management and reservation platform interface"
+              className="w-full h-auto rounded-2xl shadow-xl"
             />
           </motion.div>
         </div>
