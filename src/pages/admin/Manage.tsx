@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { DashboardLayout } from "@/components/admin/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -30,8 +29,7 @@ import {
   Filter,
   RefreshCw,
   Download,
-  Bell,
-  ArrowLeft
+  Bell
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -67,7 +65,6 @@ import {
 } from "@/components/ui/select";
 
 function ManageContent() {
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -220,32 +217,21 @@ function ManageContent() {
   };
 
   return (
-    <div className="space-y-6 animate-fade-in max-w-7xl mx-auto">
-      {/* Back Navigation */}
-      <Button 
-        variant="ghost" 
-        size="sm" 
-        onClick={() => navigate("/admin/dashboard")}
-        className="gap-2 text-muted-foreground hover:text-foreground -ml-2"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to Dashboard
-      </Button>
-
+    <div className="space-y-8 animate-fade-in">
       {/* Page Header */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground mb-1">Queue Management</h1>
-          <p className="text-muted-foreground">Create, configure, and monitor your service queues</p>
+          <h1 className="text-4xl font-bold text-foreground mb-2">Queue Management</h1>
+          <p className="text-muted-foreground text-lg">Create, configure, and monitor your service queues</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Button variant="outline" size="sm" className="gap-2">
             <RefreshCw className="h-4 w-4" />
-            <span className="hidden sm:inline">Refresh</span>
+            Refresh
           </Button>
           <Button variant="outline" size="sm" className="gap-2">
             <Download className="h-4 w-4" />
-            <span className="hidden sm:inline">Export</span>
+            Export
           </Button>
           <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
             <DialogTrigger asChild>
