@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { DashboardLayout } from "@/components/admin/DashboardLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -28,7 +30,8 @@ import {
   Filter,
   RefreshCw,
   Download,
-  Bell
+  Bell,
+  ArrowLeft
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -63,7 +66,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function Manage() {
+function ManageContent() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -216,21 +220,32 @@ export default function Manage() {
   };
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-6 animate-fade-in max-w-7xl mx-auto">
+      {/* Back Navigation */}
+      <Button 
+        variant="ghost" 
+        size="sm" 
+        onClick={() => navigate("/admin/dashboard")}
+        className="gap-2 text-muted-foreground hover:text-foreground -ml-2"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back to Dashboard
+      </Button>
+
       {/* Page Header */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-4xl font-bold text-foreground mb-2">Queue Management</h1>
-          <p className="text-muted-foreground text-lg">Create, configure, and monitor your service queues</p>
+          <h1 className="text-3xl font-bold text-foreground mb-1">Queue Management</h1>
+          <p className="text-muted-foreground">Create, configure, and monitor your service queues</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" className="gap-2">
             <RefreshCw className="h-4 w-4" />
-            Refresh
+            <span className="hidden sm:inline">Refresh</span>
           </Button>
           <Button variant="outline" size="sm" className="gap-2">
             <Download className="h-4 w-4" />
-            Export
+            <span className="hidden sm:inline">Export</span>
           </Button>
           <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
             <DialogTrigger asChild>
@@ -608,5 +623,13 @@ export default function Manage() {
         </Card>
       )}
     </div>
+  );
+}
+
+export default function Manage() {
+  return (
+    <DashboardLayout>
+      <ManageContent />
+    </DashboardLayout>
   );
 }
