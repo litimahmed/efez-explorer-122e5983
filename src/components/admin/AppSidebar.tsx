@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
-import { LayoutDashboard, Users, Settings, BarChart3, FileText, ChevronDown, Info, Phone, Handshake, Eye, Plus, Layers, Shield, Ban, FolderTree, Briefcase, UserCog, PanelLeftClose, PanelLeft } from "lucide-react";
+import { LayoutDashboard, Users, Settings, BarChart3, FileText, ChevronDown, Info, Phone, Handshake, Eye, Plus, Layers, Shield, Ban, FolderTree, Briefcase, UserCog, PanelLeftClose, PanelLeft, UserCircle } from "lucide-react";
 import toorriLogo from "@/assets/toorrii-logo.png";
 import { useContacts } from "@/hooks/admin/useContacts";
 import { NavLink } from "@/components/admin/NavLink";
@@ -696,11 +696,32 @@ export function AppSidebar() {
 
         {/* Footer */}
         <SidebarFooter className="mt-auto p-3 border-t border-sidebar-border">
-          {open ? (
-            <div className="px-3 py-2">
+          <SidebarMenu className="space-y-1">
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <NavLink
+                  to="/admin/profile"
+                  end
+                  className={`
+                    ${open ? "px-3 py-2.5" : "px-2 py-2.5 justify-center"}
+                    rounded-lg transition-all duration-150
+                    text-muted-foreground hover:text-foreground
+                    hover:bg-sidebar-accent
+                    flex items-center gap-3
+                  `}
+                  activeClassName="bg-primary text-primary-foreground font-medium"
+                >
+                  <UserCircle className="h-[18px] w-[18px] flex-shrink-0" />
+                  {open && <span className="text-sm">My Profile</span>}
+                </NavLink>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+          {open && (
+            <div className="px-3 py-2 mt-2">
               <p className="text-[10px] text-muted-foreground/60 font-medium">Toorrii Admin v1.0</p>
             </div>
-          ) : null}
+          )}
         </SidebarFooter>
       </SidebarContent>
     </Sidebar>
