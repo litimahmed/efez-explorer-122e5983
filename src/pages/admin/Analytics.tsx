@@ -71,9 +71,9 @@ const hourlyData = [
 
 const queueDistribution = [
   { name: "Service Desk", value: 35, color: "hsl(var(--primary))" },
-  { name: "Tech Support", value: 25, color: "hsl(var(--accent))" },
-  { name: "Reception", value: 20, color: "hsl(var(--success))" },
-  { name: "VIP Service", value: 12, color: "hsl(var(--warning))" },
+  { name: "Tech Support", value: 25, color: "hsl(var(--secondary))" },
+  { name: "Reception", value: 20, color: "hsl(var(--accent))" },
+  { name: "VIP Service", value: 12, color: "hsl(var(--ring))" },
   { name: "Other", value: 8, color: "hsl(var(--muted-foreground))" },
 ];
 
@@ -172,7 +172,7 @@ function AnalyticsContent() {
               <div className="flex items-baseline justify-between">
                 <div className="text-3xl font-bold text-foreground">{stat.value}</div>
                 <div className={`flex items-center gap-1 text-sm font-medium ${
-                  stat.trend === 'up' ? 'text-success' : 'text-primary'
+                  stat.trend === 'up' ? 'text-primary' : 'text-destructive'
                 }`}>
                   {stat.trend === 'up' ? (
                     <ArrowUpRight className="h-4 w-4" />
@@ -326,7 +326,7 @@ function AnalyticsContent() {
                     <span className="text-muted-foreground">Customers Served</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-success" />
+                    <div className="w-3 h-3 rounded-full bg-accent" />
                     <span className="text-muted-foreground">Satisfaction</span>
                   </div>
                 </div>
@@ -375,9 +375,9 @@ function AnalyticsContent() {
                       yAxisId="right"
                       type="monotone" 
                       dataKey="satisfaction" 
-                      stroke="hsl(var(--success))" 
+                      stroke="hsl(var(--accent))" 
                       strokeWidth={2}
-                      dot={{ fill: "hsl(var(--success))", strokeWidth: 2 }}
+                      dot={{ fill: "hsl(var(--accent))", strokeWidth: 2 }}
                     />
                   </LineChart>
                 </ResponsiveContainer>
@@ -404,8 +404,8 @@ function AnalyticsContent() {
                     <AreaChart data={weeklyData}>
                       <defs>
                         <linearGradient id="colorEfficiency" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="hsl(var(--success))" stopOpacity={0.3}/>
-                          <stop offset="95%" stopColor="hsl(var(--success))" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                          <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -430,7 +430,7 @@ function AnalyticsContent() {
                       <Area 
                         type="monotone" 
                         dataKey="efficiency" 
-                        stroke="hsl(var(--success))" 
+                        stroke="hsl(var(--primary))" 
                         strokeWidth={2}
                         fillOpacity={1} 
                         fill="url(#colorEfficiency)" 
@@ -465,7 +465,7 @@ function AnalyticsContent() {
                       <span className="text-sm text-muted-foreground">94.2%</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <div className="h-full bg-success rounded-full" style={{ width: "94%" }} />
+                      <div className="h-full bg-primary rounded-full" style={{ width: "94%" }} />
                     </div>
                   </div>
                   
@@ -475,7 +475,7 @@ function AnalyticsContent() {
                       <span className="text-sm text-muted-foreground">3.2%</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <div className="h-full bg-warning rounded-full" style={{ width: "32%" }} />
+                      <div className="h-full bg-destructive rounded-full" style={{ width: "32%" }} />
                     </div>
                   </div>
                   
@@ -485,7 +485,7 @@ function AnalyticsContent() {
                       <span className="text-sm text-muted-foreground">87%</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <div className="h-full bg-accent rounded-full" style={{ width: "87%" }} />
+                      <div className="h-full bg-primary rounded-full" style={{ width: "87%" }} />
                     </div>
                   </div>
                 </div>

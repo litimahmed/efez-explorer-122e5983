@@ -195,7 +195,7 @@ function ManageContent() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
-        return <Badge className="bg-success/10 text-success border-success/20 hover:bg-success/20">Active</Badge>;
+        return <Badge className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">Active</Badge>;
       case "paused":
         return <Badge className="bg-muted text-muted-foreground border-muted hover:bg-muted/80">Paused</Badge>;
       default:
@@ -313,7 +313,7 @@ function ManageContent() {
               <div className="flex items-baseline gap-2">
                 <div className="text-3xl font-bold text-foreground">{stat.value}</div>
                 <div className={`flex items-center gap-0.5 text-sm font-medium ${
-                  stat.trend === 'up' ? 'text-success' : 'text-primary'
+                  stat.trend === 'up' ? 'text-primary' : 'text-destructive'
                 }`}>
                   {stat.trend === 'up' ? (
                     <ArrowUpRight className="h-3 w-3" />
