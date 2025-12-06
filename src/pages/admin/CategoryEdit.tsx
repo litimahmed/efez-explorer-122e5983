@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -140,11 +141,93 @@ export default function CategoryEdit() {
 
   if (isLoadingCategories) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-10 w-10 animate-spin text-primary" />
-          <p className="text-muted-foreground text-sm">Loading category...</p>
+      <div className="space-y-6 max-w-4xl mx-auto py-8 px-4">
+        {/* Header Skeleton */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <Skeleton className="h-10 w-10 rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-7 w-36" />
+              <Skeleton className="h-4 w-28" />
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Skeleton className="h-6 w-16 rounded-lg" />
+            <Skeleton className="h-6 w-12 rounded-lg" />
+          </div>
         </div>
+
+        {/* Metadata Card Skeleton */}
+        <Card className="shadow-md border-0 bg-gradient-to-br from-muted/30 to-transparent">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-6">
+              <Skeleton className="h-4 w-4" />
+              <Skeleton className="h-4 w-48" />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Form Card Skeleton */}
+        <Card className="shadow-elegant border-0">
+          <CardHeader className="border-b border-border/50 bg-muted/30">
+            <div className="flex items-center gap-3">
+              <Skeleton className="h-10 w-10 rounded-xl" />
+              <div className="space-y-2">
+                <Skeleton className="h-5 w-36" />
+                <Skeleton className="h-4 w-52" />
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="p-6 space-y-6">
+            {/* Category Name */}
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-10 w-full rounded-xl" />
+              <Skeleton className="h-3 w-48" />
+            </div>
+
+            {/* Description */}
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-24 w-full rounded-xl" />
+              <Skeleton className="h-3 w-56" />
+            </div>
+
+            {/* Two Column */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-28" />
+                <div className="flex items-center gap-3">
+                  <Skeleton className="h-10 flex-1 rounded-xl" />
+                  <Skeleton className="h-10 w-10 rounded-xl" />
+                  <Skeleton className="h-10 w-10 rounded-xl" />
+                </div>
+                <Skeleton className="h-3 w-44" />
+              </div>
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-28" />
+                <Skeleton className="h-10 w-full rounded-xl" />
+                <Skeleton className="h-3 w-44" />
+              </div>
+            </div>
+
+            {/* Photo */}
+            <div className="space-y-3">
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-40 w-full max-w-xs rounded-xl" />
+              <Skeleton className="h-10 w-32 rounded-xl" />
+            </div>
+
+            {/* Active Status */}
+            <Skeleton className="h-16 w-full rounded-xl" />
+
+            {/* Action Buttons */}
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-border/50">
+              <Skeleton className="h-10 w-20 rounded-xl" />
+              <Skeleton className="h-10 w-32 rounded-xl" />
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
