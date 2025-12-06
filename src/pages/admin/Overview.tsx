@@ -30,7 +30,7 @@ export default function Overview() {
       change: "+12.5%",
       trend: "up",
       icon: Activity,
-      color: "text-success"
+      color: "text-primary"
     },
     {
       title: "Avg Wait Time",
@@ -38,7 +38,7 @@ export default function Overview() {
       change: "-2.3m",
       trend: "down",
       icon: Clock,
-      color: "text-warning"
+      color: "text-primary"
     },
     {
       title: "Efficiency Rate",
@@ -46,7 +46,7 @@ export default function Overview() {
       change: "+3.8%",
       trend: "up",
       icon: TrendingUp,
-      color: "text-accent"
+      color: "text-primary"
     }
   ];
 
@@ -90,7 +90,7 @@ export default function Overview() {
               <div className="flex items-baseline justify-between">
                 <div className="text-3xl font-bold text-foreground">{stat.value}</div>
                 <div className={`flex items-center gap-1 text-sm font-medium ${
-                  stat.trend === 'up' ? 'text-success' : 'text-primary'
+                  stat.trend === 'up' ? 'text-primary' : 'text-destructive'
                 }`}>
                   {stat.trend === 'up' ? (
                     <ArrowUpRight className="h-4 w-4" />
@@ -129,15 +129,15 @@ export default function Overview() {
                 >
                   <div className="flex items-start gap-4">
                     <div className={`p-2 rounded-lg ${
-                      activity.status === 'success' ? 'bg-success/10' :
+                      activity.status === 'success' ? 'bg-primary/10' :
                       activity.status === 'complete' ? 'bg-primary/10' :
-                      activity.status === 'warning' ? 'bg-warning/10' :
-                      'bg-accent/10'
+                      activity.status === 'warning' ? 'bg-destructive/10' :
+                      'bg-primary/10'
                     }`}>
-                      {activity.status === 'success' && <UserPlus className="h-4 w-4 text-success" />}
+                      {activity.status === 'success' && <UserPlus className="h-4 w-4 text-primary" />}
                       {activity.status === 'complete' && <CheckCircle2 className="h-4 w-4 text-primary" />}
-                      {activity.status === 'warning' && <AlertCircle className="h-4 w-4 text-warning" />}
-                      {activity.status === 'info' && <Activity className="h-4 w-4 text-accent" />}
+                      {activity.status === 'warning' && <AlertCircle className="h-4 w-4 text-destructive" />}
+                      {activity.status === 'info' && <Activity className="h-4 w-4 text-primary" />}
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
@@ -189,19 +189,19 @@ export default function Overview() {
             <CardContent className="p-6 space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-foreground">Service Health</span>
-                <Badge variant="default" className="bg-success hover:bg-success">
+                <Badge variant="default" className="bg-primary hover:bg-primary">
                   Operational
                 </Badge>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-foreground">API Status</span>
-                <Badge variant="default" className="bg-success hover:bg-success">
+                <Badge variant="default" className="bg-primary hover:bg-primary">
                   Online
                 </Badge>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-foreground">Database</span>
-                <Badge variant="default" className="bg-success hover:bg-success">
+                <Badge variant="default" className="bg-primary hover:bg-primary">
                   Connected
                 </Badge>
               </div>
