@@ -1,7 +1,7 @@
-import { Bell, Search, HelpCircle, Settings, LogOut, User, Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Bell, Search, HelpCircle, Settings, LogOut, User, Loader2, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,10 +14,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLogout } from "@/hooks/admin/useLogout";
 
 export function DashboardHeader() {
+  const navigate = useNavigate();
   const { logout, isLoading: isLoggingOut } = useLogout();
 
   const handleLogout = () => {
     logout();
+  };
+
+  const handleProfileClick = () => {
+    navigate("/admin/profile");
+  };
+
+  const handleSettingsClick = () => {
+    navigate("/admin/settings");
   };
 
   return (
@@ -39,6 +48,35 @@ export function DashboardHeader() {
       </div>
 
       <div className="flex items-center gap-1">
+        {/* Language Selector */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-9 w-9 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all duration-200"
+            >
+              <Globe className="h-[18px] w-[18px]" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-40">
+            <DropdownMenuLabel className="text-xs text-muted-foreground">Language</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="cursor-pointer">
+              <span className="mr-2">🇬🇧</span>
+              English
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <span className="mr-2">🇫🇷</span>
+              Français
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <span className="mr-2">🇩🇿</span>
+              العربية
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         {/* Help Button */}
         <Button 
           variant="ghost" 
@@ -99,11 +137,17 @@ export function DashboardHeader() {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator className="my-1" />
-            <DropdownMenuItem className="py-2 px-3 cursor-pointer rounded-md">
+            <DropdownMenuItem 
+              onClick={handleProfileClick}
+              className="py-2 px-3 cursor-pointer rounded-md"
+            >
               <User className="mr-2 h-4 w-4 text-muted-foreground" />
               <span>Profile</span>
             </DropdownMenuItem>
-            <DropdownMenuItem className="py-2 px-3 cursor-pointer rounded-md">
+            <DropdownMenuItem 
+              onClick={handleSettingsClick}
+              className="py-2 px-3 cursor-pointer rounded-md"
+            >
               <Settings className="mr-2 h-4 w-4 text-muted-foreground" />
               <span>Settings</span>
             </DropdownMenuItem>
